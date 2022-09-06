@@ -51,16 +51,17 @@ export default {
   mounted() {
     const userDate = new Date();
     const textLength = this?.text?.length || 1;
-    const notifyAudio = new Audio('./notify-sound.mp3');
     const hasMedia = this.imageUrl || this.videoUrl || this.audioUrl;
     const mediaDelay = hasMedia ? 2000 : 0;
     const loadingDelay = +textLength * 66 + mediaDelay + this.delay;
 
-    timeOutRef = setTimeout(() => {
-      this.loading = false;
-      notifyAudio.play();
-      this.time = `${userDate.getHours()}:${userDate.getMinutes()}`;
-    }, loadingDelay);
+    timeOutRef = setTimeout(
+      () => {
+        this.loading = false;
+        this.time = `${userDate.getHours()}:${userDate.getMinutes()}`;
+      },
+      this.isSender ? 0 : loadingDelay
+    );
   },
   beforeUnmount() {
     clearTimeout(timeOutRef);
@@ -87,7 +88,7 @@ export default {
     position: relative;
     align-items: flex-end;
     flex-direction: column;
-    animation: fadeIn ease 2s;
+    animation: fadeIn ease 0.3s;
     background-color: #1f2c33;
     p {
       width: 100%;
@@ -106,15 +107,6 @@ export default {
       text-align: right;
       background-color: #176b5b;
     }
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }
 </style>

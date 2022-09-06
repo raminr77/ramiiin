@@ -31,8 +31,10 @@ export default {
 
 <style lang="scss" scoped>
 .BaseLayoutHeader {
+  top: 0;
   width: 100%;
   display: flex;
+  position: sticky;
   cursor: pointer;
   max-height: 62px;
   user-select: none;
