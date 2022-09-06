@@ -1,7 +1,7 @@
 <template>
   <div class="BaseLayout">
     <BaseLayoutHeader />
-    <section class="BaseLayout__content">
+    <section id="messages" class="BaseLayout__content">
       <MessageItem
         v-for="(item, index) in $store.state.messages"
         :id="item.id"
@@ -66,7 +66,6 @@ export default {
   &__content {
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 20px;
     height: calc(100vh - 132px);
     // ios
     &::-webkit-scrollbar {

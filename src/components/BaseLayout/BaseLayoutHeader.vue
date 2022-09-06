@@ -1,4 +1,5 @@
 <template>
+  <ProfileModal @close-modal="closeModal" :showModal="showModal" />
   <header @click="openModal()" class="BaseLayoutHeader">
     <img
       alt="Ramiiin"
@@ -21,10 +22,20 @@
 </template>
 
 <script>
+import ProfileModal from '@/components/ProfileModal/ProfileModal.vue';
 export default {
   name: 'BaseLayoutHeader',
+  components: { ProfileModal },
+  data: () => ({
+    showModal: false
+  }),
   methods: {
-    openModal() {}
+    closeModal() {
+      this.showModal = false;
+    },
+    openModal() {
+      this.showModal = true;
+    }
   }
 };
 </script>

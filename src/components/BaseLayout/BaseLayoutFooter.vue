@@ -22,7 +22,7 @@ export default {
   }),
   methods: {
     onEnter(event) {
-      if (event.code === 'Enter') {
+      if (event.code === 'Enter' && this.text) {
         this.onSubmit();
       }
     },

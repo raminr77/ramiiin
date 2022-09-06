@@ -45,7 +45,7 @@ export default {
   }
 }
 .changeSeenIconColor {
-  animation: changeSeenIconColor forwards 0.5s;
-  animation-delay: 1.5s;
+  animation: changeSeenIconColor forwards 0.2s;
+  animation-delay: 0.3s;
 }
 </style>

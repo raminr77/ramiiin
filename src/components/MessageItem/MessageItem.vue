@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { scrollToEnd } from '@/utils/scrollToEnd.js';
 import MessageItemMedia from '@/components/MessageItem/MessageItemMedia.vue';
 import MessageItemFooter from '@/components/MessageItem/MessageItemFooter.vue';
 import MessageItemLoading from '@/components/MessageItem/MessageItemLoading.vue';
@@ -56,11 +57,13 @@ export default {
     const mediaDelay = hasMedia ? 2000 : 0;
     const loadingDelay = +textLength * 66 + mediaDelay + this.delay;
 
+    scrollToEnd();
     timeOutRef = setTimeout(
       () => {
         this.loading = false;
-        this.$emit('messageLoaded', this.id);
+        this.$emit('message-loaded', this.id);
         this.time = `${userDate.getHours()}:${userDate.getMinutes()}`;
+        scrollToEnd();
       },
       this.isSender ? 0 : loadingDelay
     );
@@ -94,7 +97,10 @@ export default {
     background-color: #1f2c33;
     p {
       width: 100%;
+      direction: rtl;
       line-height: 30px;
+      text-align: right;
+      white-space: pre-line;
       word-wrap: break-word;
     }
     &--audio-size {
