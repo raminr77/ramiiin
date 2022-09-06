@@ -4,13 +4,15 @@
     <section class="BaseLayout__content">
       <MessageItem
         v-for="(item, index) in $store.state.messages"
-        :key="index"
+        :id="item.id"
         :text="item?.text"
         :delay="item?.delay"
+        :key="item.id || index"
         :audioUrl="item?.audioUrl"
         :imageUrl="item?.imageUrl"
         :videoUrl="item?.videoUrl"
         :isSender="item?.isSender"
+        @message-loaded="changeLastLoadedMessageId"
       />
     </section>
     <BaseLayoutFooter />
@@ -18,13 +20,36 @@
 </template>
 
 <script>
+import { STORE } from '@/store/index.js';
+import { MESSAGES } from '@/constants/messages';
+
 import MessageItem from '@/components/MessageItem/MessageItem.vue';
 import BaseLayoutHeader from '@/components/BaseLayout/BaseLayoutHeader.vue';
 import BaseLayoutFooter from '@/components/BaseLayout/BaseLayoutFooter.vue';
 
 export default {
   name: 'BaseLayout',
-  components: { MessageItem, BaseLayoutHeader, BaseLayoutFooter }
+  data: () => ({
+    messageIndex: 0,
+    lastLoadedMessageId: 0
+  }),
+  components: { MessageItem, BaseLayoutHeader, BaseLayoutFooter },
+  mounted() {
+    STORE.dispatch('addMessageAction', MESSAGES[this.messageIndex]);
+  },
+  methods: {
+    changeLastLoadedMessageId(id) {
+      this.lastLoadedMessageId = id;
+    }
+  },
+  watch: {
+    lastLoadedMessageId() {
+      if (MESSAGES[this.messageIndex + 1]) {
+        this.messageIndex++;
+        STORE.dispatch('addMessageAction', MESSAGES[this.messageIndex]);
+      }
+    }
+  }
 };
 </script>
 

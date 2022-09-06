@@ -14,6 +14,7 @@
 
 <script>
 import { STORE } from '@/store/index.js';
+import { responseGenerator } from '@/utils/responseGenerator.js';
 export default {
   name: 'BaseLayoutFooter',
   data: () => ({
@@ -26,11 +27,18 @@ export default {
       }
     },
     onSubmit() {
-      STORE.commit('addMessage', {
+      let responseTimeOutRef = null;
+      const delayToResponse = this.text.length * 66 + 1000;
+      const responseMessage = responseGenerator(this.text);
+      STORE.commit('addMessageMutations', {
         delay: 0,
         isSender: true,
         text: this.text
       });
+      responseTimeOutRef = setTimeout(() => {
+        STORE.dispatch('addMessageAction', responseMessage);
+        clearTimeout(responseTimeOutRef);
+      }, delayToResponse);
       this.text = '';
     }
   }

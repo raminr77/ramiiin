@@ -34,6 +34,7 @@ export default {
     MessageItemLoading
   },
   props: {
+    id: Number,
     text: String,
     audioUrl: String,
     imageUrl: String,
@@ -58,6 +59,7 @@ export default {
     timeOutRef = setTimeout(
       () => {
         this.loading = false;
+        this.$emit('messageLoaded', this.id);
         this.time = `${userDate.getHours()}:${userDate.getMinutes()}`;
       },
       this.isSender ? 0 : loadingDelay

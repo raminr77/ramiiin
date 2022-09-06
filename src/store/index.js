@@ -7,11 +7,16 @@ export const STORE = createStore({
     messages: []
   },
   mutations: {
-    addMessage(state, message) {
+    addMessageMutations(state, message) {
       state.messages.push({
         id: id++,
         ...message
       });
+    }
+  },
+  actions: {
+    addMessageAction({ commit }, message) {
+      commit('addMessageMutations', message);
     }
   }
 });
