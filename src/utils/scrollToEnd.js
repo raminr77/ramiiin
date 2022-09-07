@@ -1,4 +1,4 @@
 export const scrollToEnd = () => {
-  const messages = document.getElementById('messages');
-  messages.scrollTop = messages.scrollHeight + 100;
+  const MESSAGES_ELEMENT = document.getElementById('messages');
+  MESSAGES_ELEMENT.scrollTop = MESSAGES_ELEMENT.scrollHeight;
 };

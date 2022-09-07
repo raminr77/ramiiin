@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { STORE } from '@/store';
 import { scrollToEnd } from '@/utils/scrollToEnd.js';
 import MessageItemMedia from '@/components/MessageItem/MessageItemMedia.vue';
 import MessageItemFooter from '@/components/MessageItem/MessageItemFooter.vue';
@@ -43,26 +44,46 @@ export default {
     isSender: Boolean,
     delay: {
       type: Number,
-      default: 1000
+      default: 500
     }
   },
   data: () => ({
     time: null,
     loading: true
   }),
+  methods: {
+    toggleTyping() {
+      if (!this.isSender) {
+        STORE.commit('toggleTypingMutations');
+      }
+    },
+    checkTime(time) {
+      const stringTime = `${time}`;
+      if (stringTime.length === 1) {
+        return '0' + stringTime;
+      }
+      return stringTime;
+    },
+    timeGenerator() {
+      const userDate = new Date();
+      return `${this.checkTime(userDate.getHours())}:${this.checkTime(
+        userDate.getMinutes()
+      )}`;
+    }
+  },
   mounted() {
-    const userDate = new Date();
     const textLength = this?.text?.length || 1;
     const hasMedia = this.imageUrl || this.videoUrl || this.audioUrl;
-    const mediaDelay = hasMedia ? 2000 : 0;
-    const loadingDelay = +textLength * 66 + mediaDelay + this.delay;
-
+    const mediaDelay = hasMedia ? 1000 : 0;
+    const loadingDelay = +textLength + mediaDelay + this.delay;
     scrollToEnd();
+    this.toggleTyping();
     timeOutRef = setTimeout(
       () => {
         this.loading = false;
         this.$emit('message-loaded', this.id);
-        this.time = `${userDate.getHours()}:${userDate.getMinutes()}`;
+        this.time = this.timeGenerator();
+        this.toggleTyping();
         scrollToEnd();
       },
       this.isSender ? 0 : loadingDelay
@@ -85,7 +106,7 @@ export default {
     max-width: 60%;
     color: #fff;
     min-width: 80px;
-    font-size: 16px;
+    font-size: 14px;
     text-align: left;
     padding: 6px 8px;
     border-radius: 8px;
@@ -98,7 +119,7 @@ export default {
     p {
       width: 100%;
       direction: rtl;
-      line-height: 30px;
+      line-height: 26px;
       text-align: right;
       white-space: pre-line;
       word-wrap: break-word;

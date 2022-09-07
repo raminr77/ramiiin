@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { STORE } from '@/store/index.js';
+import { STORE } from '@/store';
 import { MESSAGES } from '@/constants/messages';
 
 import MessageItem from '@/components/MessageItem/MessageItem.vue';

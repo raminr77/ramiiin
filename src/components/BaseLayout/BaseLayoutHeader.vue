@@ -8,7 +8,7 @@
     />
     <div class="BaseLayoutHeader__name">
       <h1>Ram</h1>
-      <span>Online</span>
+      <span>{{ $store.state.isTyping ? 'typing ...' : 'Online' }}</span>
     </div>
     <div class="BaseLayoutHeader__moreBtn">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -64,10 +64,12 @@ export default {
 
     h1 {
       font-size: 18px;
-      font-weight: bold;
+      line-height: 20px;
+      font-weight: bolder;
+      font-family: VazirmatnBold;
     }
     span {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
   &__profile {

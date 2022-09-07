@@ -27,7 +27,7 @@ export default {
   align-items: center;
 
   &__time {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 14px;
     user-select: none;
     margin-right: 4px;
