@@ -12,7 +12,24 @@
           </svg>
         </button>
       </div>
-      <div>Comming Soon</div>
+      <div class="ProfileModal__body">
+        ax
+        <div class="ProfileModal__row">
+          <p>
+            گاهی باید دل کند
+            <br />
+            از هر آنچه احساس میکنی زیباست
+          </p>
+        </div>
+        <div class="ProfileModal__row">
+          <a href="tel:+989930600012">+989930600012</a>
+        </div>
+        <div class="ProfileModal__row">
+          <a href="mailto:info@ramiiin.ir">Info@Ramiiin.ir</a>
+        </div>
+        <div class="ProfileModal__row"></div>
+        <div class="ProfileModal__row"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -76,6 +93,19 @@ export default {
       cursor: pointer;
       background-color: transparent;
     }
+  }
+  &__body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__row {
+    display: flex;
+    padding: 8px 0;
+    line-height: 30px;
+    align-content: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #888888;
   }
 }
 </style>

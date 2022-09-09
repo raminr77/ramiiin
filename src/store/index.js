@@ -5,7 +5,8 @@ let id = 1;
 export const STORE = createStore({
   state: {
     messages: [],
-    isTyping: false
+    isTyping: false,
+    hasNewStory: true
   },
   mutations: {
     addMessageMutations(state, message) {
@@ -16,6 +17,9 @@ export const STORE = createStore({
     },
     toggleTypingMutations(state) {
       state.isTyping = !state.isTyping;
+    },
+    seeNewStoryMutations(state) {
+      state.hasNewStory = false;
     }
   },
   actions: {

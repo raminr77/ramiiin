@@ -1,16 +1,23 @@
 <template>
+  <StoryModal
+    v-if="showStoryModal"
+    @close-modal="closeStoryModal"
+    :showModal="showStoryModal"
+  />
   <ProfileModal @close-modal="closeModal" :showModal="showModal" />
-  <header @click="openModal()" class="BaseLayoutHeader">
+  <header class="BaseLayoutHeader">
     <img
       alt="Ramiiin"
+      @click="showStory()"
       class="BaseLayoutHeader__profile"
-      src="@/assets/images/profile-01.jpg"
+      :src="`./images/profile/profile-${profileImage}.jpg`"
+      :class="{ ['BaseLayoutHeader__profile--hasStory']: $store.state.hasNewStory }"
     />
-    <div class="BaseLayoutHeader__name">
+    <div @click="openModal()" class="BaseLayoutHeader__name">
       <h1>Ram</h1>
       <span>{{ $store.state.isTyping ? 'typing ...' : 'Online' }}</span>
     </div>
-    <div class="BaseLayoutHeader__moreBtn">
+    <div @click="openModal()" class="BaseLayoutHeader__moreBtn">
       <svg viewBox="0 0 24 24" width="24" height="24">
         <path
           fill="#fff"
@@ -22,12 +29,16 @@
 </template>
 
 <script>
+import { STORE } from '@/store';
+import StoryModal from '@/components/StoryModal/StoryModal.vue';
 import ProfileModal from '@/components/ProfileModal/ProfileModal.vue';
 export default {
   name: 'BaseLayoutHeader',
-  components: { ProfileModal },
+  components: { ProfileModal, StoryModal },
   data: () => ({
-    showModal: false
+    showModal: false,
+    profileImage: '01',
+    showStoryModal: false
   }),
   methods: {
     closeModal() {
@@ -35,6 +46,13 @@ export default {
     },
     openModal() {
       this.showModal = true;
+    },
+    showStory() {
+      this.showStoryModal = true;
+      STORE.commit('seeNewStoryMutations');
+    },
+    closeStoryModal() {
+      this.showStoryModal = false;
     }
   }
 };
@@ -45,8 +63,8 @@ export default {
   top: 0;
   width: 100%;
   display: flex;
-  position: sticky;
   cursor: pointer;
+  position: sticky;
   max-height: 62px;
   user-select: none;
   padding: 10px 16px;
@@ -73,19 +91,36 @@ export default {
     }
   }
   &__profile {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     margin-right: 16px;
     border-radius: 100%;
+    border: 2px solid transparent;
+    &--hasStory {
+      border-color: #00d363;
+      animation: bilink 2s infinite ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
   }
   &__moreBtn {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: transparent;
+  }
+}
+@keyframes bilink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
