@@ -21,7 +21,7 @@
 
 <script>
 import { STORE } from '@/store';
-import { MESSAGES } from '@/constants/messages';
+import { START_MESSAGES } from '@/constants/messages';
 
 import MessageItem from '@/components/MessageItem/MessageItem.vue';
 import BaseLayoutHeader from '@/components/BaseLayout/BaseLayoutHeader.vue';
@@ -35,7 +35,7 @@ export default {
   }),
   components: { MessageItem, BaseLayoutHeader, BaseLayoutFooter },
   mounted() {
-    STORE.dispatch('addMessageAction', MESSAGES[this.messageIndex]);
+    STORE.dispatch('addMessageAction', START_MESSAGES[this.messageIndex]);
   },
   methods: {
     changeLastLoadedMessageId(id) {
@@ -44,9 +44,9 @@ export default {
   },
   watch: {
     lastLoadedMessageId() {
-      if (MESSAGES[this.messageIndex + 1]) {
+      if (START_MESSAGES[this.messageIndex + 1]) {
         this.messageIndex++;
-        STORE.dispatch('addMessageAction', MESSAGES[this.messageIndex]);
+        STORE.dispatch('addMessageAction', START_MESSAGES[this.messageIndex]);
       }
     }
   }

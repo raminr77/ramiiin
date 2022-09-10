@@ -14,8 +14,8 @@
 
 <script>
 import { STORE } from '@/store';
-import { scrollToEnd } from '@/utils/scrollToEnd.js';
-import { responseGenerator } from '@/utils/responseGenerator.js';
+import { scrollToEnd } from '@/utils/scrollToEnd';
+import { responseGenerator } from '@/utils/responseGenerator';
 export default {
   name: 'BaseLayoutFooter',
   data: () => ({

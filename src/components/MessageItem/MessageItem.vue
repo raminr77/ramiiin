@@ -22,7 +22,7 @@
 
 <script>
 import { STORE } from '@/store';
-import { scrollToEnd } from '@/utils/scrollToEnd.js';
+import { scrollToEnd } from '@/utils/scrollToEnd';
 import MessageItemMedia from '@/components/MessageItem/MessageItemMedia.vue';
 import MessageItemFooter from '@/components/MessageItem/MessageItemFooter.vue';
 import MessageItemLoading from '@/components/MessageItem/MessageItemLoading.vue';
