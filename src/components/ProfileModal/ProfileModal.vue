@@ -13,8 +13,10 @@
         </button>
       </div>
       <div class="ProfileModal__body">
-        ax
-        <div class="ProfileModal__row">
+        <div class="ProfileModal__imageContainer">
+          <ProfileModalSlider />
+        </div>
+        <div class="ProfileModal__row bio">
           <p>
             گاهی باید دل کند
             <br />
@@ -22,23 +24,27 @@
           </p>
         </div>
         <div class="ProfileModal__row">
-          <a href="tel:+989930600012">+989930600012</a>
-        </div>
-        <div class="ProfileModal__row">
+          <span>Email: </span>
           <a href="mailto:info@ramiiin.ir">Info@Ramiiin.ir</a>
         </div>
-        <div class="ProfileModal__row"></div>
-        <div class="ProfileModal__row"></div>
+        <div class="ProfileModal__row">
+          <span>Phone Number:</span>
+          <a href="tel:+989930600012">09930600012</a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ProfileModalSlider from '@/components/ProfileModal/ProfileModalSlider.vue';
 export default {
   name: 'ProfileModal',
   props: {
     showModal: Boolean
+  },
+  components: {
+    ProfileModalSlider
   }
 };
 </script>
@@ -69,17 +75,15 @@ export default {
     min-height: 300px;
     max-height: 500px;
     position: absolute;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: #1f2c33;
     transform: translate(-50%, -40%);
   }
   &__header {
     width: 100%;
     display: flex;
-    margin-bottom: 8px;
     align-content: center;
     justify-content: space-between;
-    border-bottom: 1px solid #fff;
     h3 {
       line-height: 40px;
       font-weight: bold;
@@ -98,14 +102,39 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
+    a {
+      line-height: 20px;
+      color: #00ea98;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
   }
   &__row {
+    width: 100%;
     display: flex;
-    padding: 8px 0;
     line-height: 30px;
-    align-content: center;
+    align-items: center;
     justify-content: flex-start;
-    border-bottom: 1px solid #888888;
+    p {
+      width: 100%;
+    }
+    span {
+      margin-right: 6px;
+    }
+    &.bio {
+      padding: 20px 0;
+      text-align: right;
+      margin-bottom: 20px;
+      border-bottom: 1px dashed #ddd;
+    }
+  }
+  &__imageContainer {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    min-height: 220px;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

@@ -8,7 +8,12 @@
         ></path>
       </svg>
     </button>
-    <img alt="Ramiiin Story" :src="`./images/story/story-${selectedStoryImage}.jpg`" />
+    <div class="StoryModal__loaderContainer">
+      <div class="StoryModal__loader"></div>
+      <div class="StoryModal__loader"></div>
+      <div class="StoryModal__loader"></div>
+    </div>
+    <img alt="" :src="`./images/story/story-${selectedStoryImage}.jpg`" />
     <div class="StoryModal__timerContainer">
       <div
         class="StoryModal__timer"
@@ -21,7 +26,7 @@
 </template>
 
 <script>
-const IMAGE_COUNT = 3;
+const IMAGE_COUNT = 6;
 const INTERVAL_TIME = 100;
 export default {
   name: 'StoryModal',
@@ -99,13 +104,14 @@ export default {
   position: absolute;
   text-align: center;
   transform: translateX(-50%);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
   img {
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
+    left: 50%;
     position: absolute;
+    max-height: 100vh;
+    transform: translateX(-50%);
   }
   &__closeButton {
     top: 30px;
@@ -131,6 +137,40 @@ export default {
     animation-delay: 0;
     background-color: #fff;
     transition: width 0.3s linear;
+  }
+  &__loaderContainer {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    display: flex;
+    min-height: 200px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+  }
+  &__loader {
+    width: 5px;
+    height: 5px;
+    margin: 0 5px;
+    border-radius: 100%;
+    background: #fff;
+    animation: storyLoading 1s infinite ease;
+    &:nth-child(1),
+    &:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+  }
+}
+@keyframes storyLoading {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 </style>
