@@ -54,37 +54,35 @@ export default {
   }),
   methods: {
     initSlider() {
-      var audio = this.$refs.player;
-      if (audio) {
-        this.audioDuration = Math.round(audio.duration);
+      const AUDIO = this.$refs.player;
+      if (AUDIO) {
+        this.audioDuration = Math.round(AUDIO.duration);
       }
     },
     convertTime(seconds) {
       const format = (val) => `0${Math.floor(val)}`.slice(-2);
-      var minutes = (seconds % 3600) / 60;
+      const minutes = (seconds % 3600) / 60;
       return [minutes, seconds % 60].map(format).join(':');
     },
     totalTime() {
-      var audio = this.$refs.player;
-      if (audio) {
-        var seconds = audio.duration;
-        return this.convertTime(seconds);
+      const AUDIO = this.$refs.player;
+      if (AUDIO) {
+        return this.convertTime(AUDIO.duration);
       }
       return '00:00';
     },
     elapsedTime() {
-      var audio = this.$refs.player;
-      if (audio) {
-        var seconds = audio.currentTime;
-        return this.convertTime(seconds);
+      const AUDIO = this.$refs.player;
+      if (AUDIO) {
+        return this.convertTime(AUDIO.currentTime);
       }
       return '00:00';
     },
     playbackListener() {
-      var audio = this.$refs.player;
-      this.playbackTime = audio.currentTime;
-      audio.addEventListener('ended', this.endListener);
-      audio.addEventListener('pause', this.pauseListener);
+      const AUDIO = this.$refs.player;
+      this.playbackTime = AUDIO.currentTime;
+      AUDIO.addEventListener('ended', this.endListener);
+      AUDIO.addEventListener('pause', this.pauseListener);
     },
     pauseListener() {
       this.isPlaying = false;
@@ -97,18 +95,18 @@ export default {
       this.cleanupListeners();
     },
     cleanupListeners() {
-      var audio = this.$refs.player;
-      audio.removeEventListener('timeupdate', this.playbackListener);
-      audio.removeEventListener('ended', this.endListener);
-      audio.removeEventListener('pause', this.pauseListener);
+      const AUDIO = this.$refs.player;
+      AUDIO.removeEventListener('ended', this.endListener);
+      AUDIO.removeEventListener('pause', this.pauseListener);
+      AUDIO.removeEventListener('timeupdate', this.playbackListener);
     },
     toggleAudio() {
-      var audio = this.$refs.player;
-      if (audio.paused) {
-        audio.play();
+      const AUDIO = this.$refs.player;
+      if (AUDIO.paused) {
+        AUDIO.play();
         this.isPlaying = true;
       } else {
-        audio.pause();
+        AUDIO.pause();
         this.isPlaying = false;
       }
     },
@@ -116,45 +114,47 @@ export default {
       this.isX2 = !this.isX2;
     }
   },
+  watch: {
+    isX2() {
+      const AUDIO = this.$refs.player;
+      if (this.isX2) {
+        AUDIO.playbackRate = 2;
+      } else {
+        AUDIO.playbackRate = 1;
+      }
+    },
+    isPlaying() {
+      if (this.isPlaying) {
+        const AUDIO = this.$refs.player;
+        this.initSlider();
+        if (!this.listenerActive) {
+          this.listenerActive = true;
+          AUDIO.addEventListener('timeupdate', this.playbackListener);
+        }
+      }
+    },
+    playbackTime() {
+      const diff = Math.abs(this.playbackTime - this.$refs.player.currentTime);
+      if (diff > 0.01) {
+        this.$refs.player.currentTime = this.playbackTime;
+      }
+    }
+  },
   mounted() {
-    this.$nextTick(function () {
-      var audio = this.$refs.player;
-      audio.addEventListener(
+    this.$nextTick(() => {
+      const AUDIO = this.$refs.player;
+      AUDIO.addEventListener(
         'loadedmetadata',
         function () {
           this.initSlider();
         }.bind(this)
       );
-      audio.addEventListener(
+      AUDIO.addEventListener(
         'canplay',
         function () {
           this.audioLoaded = true;
         }.bind(this)
       );
-      this.$watch('isX2', function () {
-        var audio = this.$refs.player;
-        if (this.isX2) {
-          audio.playbackRate = 2;
-        } else {
-          audio.playbackRate = 1;
-        }
-      });
-      this.$watch('isPlaying', function () {
-        if (this.isPlaying) {
-          var audio = this.$refs.player;
-          this.initSlider();
-          if (!this.listenerActive) {
-            this.listenerActive = true;
-            audio.addEventListener('timeupdate', this.playbackListener);
-          }
-        }
-      });
-      this.$watch('playbackTime', function () {
-        var diff = Math.abs(this.playbackTime - this.$refs.player.currentTime);
-        if (diff > 0.01) {
-          this.$refs.player.currentTime = this.playbackTime;
-        }
-      });
     });
   }
 };
@@ -209,10 +209,10 @@ export default {
         height: 20px;
         cursor: pointer;
         appearance: none;
-        background: #04aa6d;
+        background: #005a39;
         -webkit-appearance: none;
         border-radius: 0 8px 8px 0;
-        box-shadow: -80px 0 0 80px #04aa6d;
+        box-shadow: -500px 0 0 500px #04aa6d;
       }
       &::-moz-range-thumb {
         width: 4px;

@@ -17,13 +17,13 @@
       <h1>Ram</h1>
       <span>{{ $store.state.isTyping ? 'typing ...' : 'Online' }}</span>
     </div>
-    <div @click="openModal()" class="BaseLayoutHeader__moreBtn">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <path
-          fill="#fff"
-          d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
-        ></path>
-      </svg>
+    <div @click="toggleFullScreen()" class="BaseLayoutHeader__moreBtn">
+      <img
+        v-if="isFullScreen"
+        alt="Go Out Full Screen"
+        src="../../assets/images/out-fullscreen.svg"
+      />
+      <img v-else alt="Go In Full Screen" src="../../assets/images/in-fullscreen.svg" />
     </div>
   </header>
 </template>
@@ -32,12 +32,18 @@
 import { STORE } from '@/store';
 import StoryModal from '@/components/StoryModal/StoryModal.vue';
 import ProfileModal from '@/components/ProfileModal/ProfileModal.vue';
+import {
+  GoInFullscreen,
+  GoOutFullscreen,
+  IsFullScreenCurrently
+} from '@/utils/fullScreen';
 export default {
   name: 'BaseLayoutHeader',
   components: { ProfileModal, StoryModal },
   data: () => ({
     showModal: false,
     profileImage: '01',
+    isFullScreen: false,
     showStoryModal: false
   }),
   methods: {
@@ -53,6 +59,16 @@ export default {
     },
     closeStoryModal() {
       this.showStoryModal = false;
+    },
+    toggleFullScreen() {
+      if (IsFullScreenCurrently()) {
+        GoOutFullscreen();
+        this.isFullScreen = false;
+      } else {
+        const APP = document.querySelector('#app');
+        this.isFullScreen = true;
+        GoInFullscreen(APP);
+      }
     }
   }
 };
@@ -110,6 +126,10 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: transparent;
+    img {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 @keyframes bilink {
