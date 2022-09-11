@@ -109,8 +109,8 @@ export default {
   img {
     top: 0;
     left: 50%;
-    position: absolute;
     max-height: 100vh;
+    position: absolute;
     transform: translateX(-50%);
   }
   &__closeButton {

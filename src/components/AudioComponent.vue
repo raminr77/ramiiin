@@ -31,7 +31,11 @@
           <div class="x-space">-</div>
           <div v-text="totalTime()"></div>
         </div>
-        <button class="AudioComponent__audioSpeed" @click="changeSpeed()">
+        <button
+          class="AudioComponent__audioSpeed"
+          v-show="audioLoaded"
+          @click="changeSpeed()"
+        >
           {{ isX2 ? 'x1' : 'x2' }}
         </button>
       </div>
