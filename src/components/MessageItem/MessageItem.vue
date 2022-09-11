@@ -52,7 +52,10 @@ export default {
     loading: true
   }),
   methods: {
-    toggleTyping() {
+    toggleTyping(action) {
+      if (STORE.state.isTyping && action) {
+        return;
+      }
       if (!this.isSender) {
         STORE.commit('toggleTypingMutations');
       }
@@ -77,13 +80,13 @@ export default {
     const mediaDelay = hasMedia ? 1000 : 0;
     const loadingDelay = +textLength + mediaDelay + this.delay;
     scrollToEnd();
-    this.toggleTyping();
+    this.toggleTyping(true);
     timeOutRef = setTimeout(
       () => {
         this.loading = false;
         this.$emit('message-loaded', this.id);
         this.time = this.timeGenerator();
-        this.toggleTyping();
+        this.toggleTyping(false);
         scrollToEnd();
       },
       this.isSender ? 0 : loadingDelay
