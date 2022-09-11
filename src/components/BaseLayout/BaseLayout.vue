@@ -58,7 +58,7 @@ export default {
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  overflow: auto;
+  overflow: hidden;
   max-width: 600px;
   animation: fadeIn ease 0.5s;
   background-color: rgba(0, 0, 0, 0.2);
@@ -66,6 +66,7 @@ export default {
   &__content {
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 16px;
     height: calc(100vh - 132px);
     // ios
     &::-webkit-scrollbar {
