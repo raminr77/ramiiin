@@ -129,8 +129,8 @@ export default {
       word-wrap: break-word;
     }
     &--media-size {
-      width: 400px;
-      max-width: 80%;
+      width: 460px;
+      max-width: 90%;
     }
   }
 
