@@ -17,9 +17,7 @@
 </template>
 
 <script>
-import { STORE } from '@/store';
-import { scrollToEnd } from '@/utils/scrollToEnd';
-import { responseGenerator } from '@/utils/responseGenerator';
+import { messageSender } from '@/utils/messageSender';
 export default {
   name: 'BaseLayoutFooter',
   data: () => ({
@@ -35,20 +33,7 @@ export default {
       }
     },
     onSubmit() {
-      let responseTimeOutRef = null;
-      const textLen = this.text?.length || 1000;
-      const delayToResponse = textLen > 1000 ? 1000 : textLen + 1000;
-      const responseMessage = responseGenerator(this.text);
-      STORE.commit('addMessageMutations', {
-        delay: 0,
-        isSender: true,
-        text: this.text
-      });
-      responseTimeOutRef = setTimeout(() => {
-        STORE.dispatch('addMessageAction', responseMessage);
-        scrollToEnd();
-        clearTimeout(responseTimeOutRef);
-      }, delayToResponse);
+      messageSender(this.text);
       this.text = '';
     }
   }

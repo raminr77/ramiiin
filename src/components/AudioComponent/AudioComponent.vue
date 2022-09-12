@@ -2,51 +2,37 @@
   <audio style="display: none" ref="player" :id="playerid">
     <source :src="url" type="audio/mpeg" />
   </audio>
-  <!-- custom -->
+
   <div class="AudioComponent">
-    <!-- Actions -->
-    <div class="AudioComponent__actionButtonContianer">
-      <button
-        v-show="!isPlaying"
-        @click="toggleAudio()"
-        :class="{
-          ['AudioComponent__actionButtonContianer--loaded']: audioLoaded,
-          ['AudioComponent__actionButtonContianer--loading']: !audioLoaded
-        }"
-      >
-        <img alt="Play" src="../assets/images/play.svg" />
-      </button>
-      <button v-show="isPlaying" @click="toggleAudio()">
-        <img alt="Pause" src="../assets/images/pause.svg" />
-      </button>
-    </div>
-    <!-- Bar -->
+    <AudioComponentActions
+      :isPlaying="isPlaying"
+      :audioLoaded="audioLoaded"
+      @toggle-audio="toggleAudio()"
+    />
+
     <div class="AudioComponent__audioContianer">
       <input min="0" type="range" v-model="playbackTime" :max="audioDuration" />
-      <!-- Timer & Speed -->
-      <div class="AudioComponent__audioFooter">
-        <div v-show="!audioLoaded" class="AudioComponent__audioTimer">Loading...</div>
-        <div v-show="audioLoaded" class="AudioComponent__audioTimer">
-          <div v-text="elapsedTime()"></div>
-          <div class="x-space">-</div>
-          <div v-text="totalTime()"></div>
-        </div>
-        <button
-          class="AudioComponent__audioSpeed"
-          v-show="audioLoaded"
-          @click="changeSpeed()"
-        >
-          {{ isX2 ? 'x1' : 'x2' }}
-        </button>
-      </div>
+      <AudioComponentTimer
+        :isX2="isX2"
+        :totalTime="totalTime()"
+        :audioLoaded="audioLoaded"
+        :elapsedTime="elapsedTime()"
+        @change-speed="changeSpeed()"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import AudioComponentTimer from '@/components/AudioComponent/AudioComponentTimer.vue';
+import AudioComponentActions from '@/components/AudioComponent/AudioComponentActions.vue';
 export default {
   props: {
     url: String
+  },
+  components: {
+    AudioComponentTimer,
+    AudioComponentActions
   },
   data: () => ({
     isX2: false,
@@ -168,31 +154,6 @@ export default {
 .AudioComponent {
   display: flex;
   align-items: center;
-  &__actionButtonContianer {
-    margin-right: 6px;
-    button {
-      width: 40px;
-      height: 40px;
-      border: none;
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    &--loaded {
-      opacity: 1;
-      pointer-events: all;
-    }
-    &--loading {
-      opacity: 0.4;
-      pointer-events: none;
-    }
-  }
   &__audioContianer {
     width: 100%;
     display: flex;
@@ -230,31 +191,6 @@ export default {
         background-color: #04aa6d;
       }
     }
-  }
-  &__audioFooter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &__audioTimer {
-    width: 100%;
-    display: flex;
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 20px;
-    user-select: none;
-    align-items: center;
-    .x-space {
-      margin: 0 4px;
-    }
-  }
-  &__audioSpeed {
-    width: 40px;
-    height: 20px;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    background-color: transparent;
   }
 }
 </style>

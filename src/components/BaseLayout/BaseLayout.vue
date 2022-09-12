@@ -1,6 +1,10 @@
 <template>
   <div class="BaseLayout">
-    <HelpModal :showModal="helpModal" @close-modal="hideHelpModal()" />
+    <HelpModal
+      :showModal="helpModal"
+      @send-command="sendCommand"
+      @close-modal="hideHelpModal()"
+    />
     <BaseLayoutHeader />
     <section id="messages" class="BaseLayout__content">
       <MessageItem
@@ -23,6 +27,7 @@
 <script>
 import { STORE } from '@/store';
 import { START_MESSAGES } from '@/constants/messages';
+import { messageSender } from '@/utils/messageSender';
 
 import HelpModal from '@/components/HelpModal/HelpModal.vue';
 import MessageItem from '@/components/MessageItem/MessageItem.vue';
@@ -49,6 +54,9 @@ export default {
     },
     changeLastLoadedMessageId(id) {
       this.lastLoadedMessageId = id;
+    },
+    sendCommand(command) {
+      messageSender(command);
     }
   },
   watch: {

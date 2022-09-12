@@ -7,9 +7,13 @@
       <p>چند نمونه از دستورات مهم رو اینجا واست نوشتم :</p>
       <br />
       <ul>
-        <li v-for="(command, index) in commands" :key="index">
+        <li
+          v-for="(command, index) in commands"
+          :key="index"
+          @click="sendCommand(command)"
+        >
           <span>{{ index + 1 }} - </span>
-          <code>{{ command }}</code>
+          <code>{{ command.toLowerCase() }}</code>
           <span>{{ responses[command].help }}</span>
         </li>
       </ul>
@@ -32,6 +36,12 @@ export default {
   mounted() {
     this.responses = RESPONSES;
     this.commands = Object.keys(RESPONSES);
+  },
+  methods: {
+    sendCommand(command) {
+      this.$emit('send-command', command);
+      this.$emit('close-modal');
+    }
   }
 };
 </script>
@@ -47,20 +57,20 @@ export default {
   height: 100vh;
   position: fixed;
   user-select: none;
-  backdrop-filter: blur(10px);
-  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.5);
   &__content {
     width: 90%;
     direction: rtl;
     height: 100vh;
     display: flex;
-    padding: 16px;
+    padding: 40px 16px 16px;
     margin: 0 auto;
     color: #fff;
+    font-size: 14px;
     max-width: 600px;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     h3 {
       width: 100%;
       text-align: right;
@@ -104,11 +114,15 @@ export default {
         code {
           color: #000;
           padding: 0 8px;
+          cursor: pointer;
           line-height: 36px;
           margin-left: 16px;
           border-radius: 4px;
           letter-spacing: 1px;
           background: #bbdefb;
+          &:hover {
+            background: #91bcdf;
+          }
         }
       }
     }

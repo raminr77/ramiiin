@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import AudioComponent from '@/components/AudioComponent.vue';
 import VideoComponent from '@/components/VideoComponent.vue';
+import AudioComponent from '@/components/AudioComponent/AudioComponent.vue';
 
 export default {
   name: 'MessageItemMedia',
