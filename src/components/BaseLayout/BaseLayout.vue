@@ -1,5 +1,6 @@
 <template>
   <div class="BaseLayout">
+    <HelpModal :showModal="helpModal" @close-modal="hideHelpModal()" />
     <BaseLayoutHeader />
     <section id="messages" class="BaseLayout__content">
       <MessageItem
@@ -15,7 +16,7 @@
         @message-loaded="changeLastLoadedMessageId"
       />
     </section>
-    <BaseLayoutFooter />
+    <BaseLayoutFooter @help-modal="showHelpModal()" />
   </div>
 </template>
 
@@ -23,6 +24,7 @@
 import { STORE } from '@/store';
 import { START_MESSAGES } from '@/constants/messages';
 
+import HelpModal from '@/components/HelpModal/HelpModal.vue';
 import MessageItem from '@/components/MessageItem/MessageItem.vue';
 import BaseLayoutHeader from '@/components/BaseLayout/BaseLayoutHeader.vue';
 import BaseLayoutFooter from '@/components/BaseLayout/BaseLayoutFooter.vue';
@@ -31,13 +33,20 @@ export default {
   name: 'BaseLayout',
   data: () => ({
     messageIndex: 0,
+    helpModal: false,
     lastLoadedMessageId: 0
   }),
-  components: { MessageItem, BaseLayoutHeader, BaseLayoutFooter },
+  components: { HelpModal, MessageItem, BaseLayoutHeader, BaseLayoutFooter },
   mounted() {
     STORE.dispatch('addMessageAction', START_MESSAGES[this.messageIndex]);
   },
   methods: {
+    showHelpModal() {
+      this.helpModal = true;
+    },
+    hideHelpModal() {
+      this.helpModal = false;
+    },
     changeLastLoadedMessageId(id) {
       this.lastLoadedMessageId = id;
     }

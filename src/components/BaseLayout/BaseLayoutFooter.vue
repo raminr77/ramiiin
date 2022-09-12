@@ -1,7 +1,10 @@
 <template>
   <footer @keydown="onEnter" class="BaseLayoutFooter">
+    <button @click="toggleShowHelpModal" class="BaseLayoutFooter__helpBtn">
+      <img width="40" alt="?" src="../../assets/images/help-icon.png" />
+    </button>
     <input type="text" v-model="text" />
-    <button @click="onSubmit()" :disabled="!text">
+    <button class="BaseLayoutFooter__sendBtn" @click="onSubmit()" :disabled="!text">
       <svg viewBox="0 0 24 24" width="24" height="24">
         <path
           :fill="text ? '#176b5b' : '#999'"
@@ -9,6 +12,7 @@
         ></path>
       </svg>
     </button>
+    <HelpModal :showModal="showHelpModal" />
   </footer>
 </template>
 
@@ -22,6 +26,9 @@ export default {
     text: ''
   }),
   methods: {
+    toggleShowHelpModal() {
+      this.$emit('help-modal');
+    },
     onEnter(event) {
       if (event.code === 'Enter' && this.text) {
         this.onSubmit();
@@ -68,6 +75,7 @@ export default {
   input {
     width: 100%;
     outline: none;
+    margin: 0 6px;
     padding: 0 8px;
     color: #fff;
     font-size: 16px;
@@ -87,8 +95,11 @@ export default {
     border: none;
     outline: none;
     cursor: pointer;
-    margin-left: 6px;
     background-color: transparent;
+  }
+  &__sendBtn {
+  }
+  &__helpBtn {
   }
 }
 </style>

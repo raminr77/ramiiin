@@ -1,9 +1,10 @@
 export const RESPONSES = {
   SALAM: {
-    text: 'Salam'
+    text: 'Salam',
+    help: 'سلام میکنه در جواب شما'
   },
-  SALAR: {
-    audioUrl:
-      'https://dl.download1music.ir/Music/2022/Salar Aghili/Salar Aghili - Che Roozaei.mp3'
+  MUSIC: {
+    help: 'یه آهنگ واسه تو میفرسته ...',
+    audioUrl: './audios/Iran.mp3'
   }
 };

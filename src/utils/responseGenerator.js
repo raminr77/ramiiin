@@ -7,8 +7,6 @@ let IDK_COUNTER = 0;
 export const responseGenerator = (message) => {
   const transformed = transformer(message);
 
-  console.log('-', transformed);
-  
   if (RESPONSES[transformed]) {
     IDK_COUNTER = 0;
     return RESPONSES[transformed];
