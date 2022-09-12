@@ -1,5 +1,5 @@
 <template>
-  <video controls>
+  <video class="VideoComponent" controls>
     <source :src="url" type="video/mp4" />
     Your browser does not support HTML video.
   </video>
@@ -14,4 +14,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.VideoComponent {
+  min-width: 250px;
+}
+</style>

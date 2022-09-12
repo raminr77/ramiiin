@@ -6,7 +6,7 @@
     <div
       v-else
       class="MessageItem__content"
-      :class="{ ['MessageItem__content--audio-size']: audioUrl }"
+      :class="{ ['MessageItem__content--media-size']: audioUrl || videoUrl }"
     >
       <MessageItemMedia
         :text="text"
@@ -110,6 +110,7 @@ export default {
     color: #fff;
     min-width: 80px;
     font-size: 14px;
+    overflow: hidden;
     text-align: left;
     padding: 6px 8px;
     border-radius: 8px;
@@ -127,7 +128,7 @@ export default {
       white-space: pre-line;
       word-wrap: break-word;
     }
-    &--audio-size {
+    &--media-size {
       width: 400px;
       max-width: 80%;
     }
