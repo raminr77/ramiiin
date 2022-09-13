@@ -1,5 +1,11 @@
 <template>
-  <audio style="display: none" ref="player" :id="playerid">
+  <audio
+    ref="player"
+    :id="playerid"
+    style="display: none"
+    @canplay="canPlay()"
+    @loadedmetadata="initSlider()"
+  >
     <source :src="url" type="audio/mpeg" />
   </audio>
 
@@ -102,6 +108,9 @@ export default {
     },
     changeSpeed() {
       this.isX2 = !this.isX2;
+    },
+    canPlay() {
+      this.audioLoaded = true;
     }
   },
   watch: {
@@ -129,23 +138,6 @@ export default {
         this.$refs.player.currentTime = this.playbackTime;
       }
     }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      const AUDIO = this.$refs.player;
-      AUDIO.addEventListener(
-        'loadedmetadata',
-        function () {
-          this.initSlider();
-        }.bind(this)
-      );
-      AUDIO.addEventListener(
-        'canplay',
-        function () {
-          this.audioLoaded = true;
-        }.bind(this)
-      );
-    });
   }
 };
 </script>
