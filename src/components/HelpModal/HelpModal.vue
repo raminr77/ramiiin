@@ -4,7 +4,7 @@
       <h3>راهنما</h3>
       <p>سلام. این ربات سعی میکنه از طرف رامین باهات صحبت کنه و جوابت رو بده!</p>
       <p>سعی میکنه به اکثر سوال‌های شما جواب بده اما خب ممکنه خطا هم داشته باشه</p>
-      <p>چند نمونه از دستورات مهم رو اینجا واست نوشتم :</p>
+      <p>چند نمونه از سوالات مهم رو اینجا واست نوشتم :</p>
       <br />
       <ul>
         <li
@@ -13,8 +13,7 @@
           @click="sendCommand(command)"
         >
           <span>{{ index + 1 }} - </span>
-          <code>{{ command.toLowerCase() }}</code>
-          <span>{{ responses[command].help }}</span>
+          <div>{{ responses[command].help }}</div>
         </li>
       </ul>
       <button @click="$emit('close-modal')">متوجه شدم 😎</button>
@@ -111,15 +110,17 @@ export default {
           margin-left: 10px;
           font-family: VazirmatnFaNum;
         }
-        code {
+        div {
+          width: 100%;
           color: #000;
-          padding: 0 8px;
+          padding: 0 16px;
           cursor: pointer;
-          line-height: 36px;
+          font-size: 12px;
+          line-height: 33px;
           margin-left: 16px;
           border-radius: 4px;
-          letter-spacing: 1px;
           background: #bbdefb;
+          font-family: VazirmatnFaNumBold;
           &:hover {
             background: #91bcdf;
           }
