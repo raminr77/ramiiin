@@ -168,7 +168,6 @@ export default {
         appearance: none;
         background: #005a39;
         -webkit-appearance: none;
-        border-radius: 0 8px 8px 0;
         box-shadow: -500px 0 0 500px #04aa6d;
       }
       &::-moz-range-thumb {
