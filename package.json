@@ -2,9 +2,9 @@
   "name": "ramiiin",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
     "deploy": "sh deploy.sh",
+    "dev": "vite --port 3000",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
