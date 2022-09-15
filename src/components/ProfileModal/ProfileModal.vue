@@ -17,10 +17,10 @@
           <ProfileModalSlider />
         </div>
         <div class="ProfileModal__row bio">
-          <p>
-            گاهی باید دل کند
+          <p dir="rtl">
+            گاهی باید دِل کَند
             <br />
-            از هر آنچه احساس میکنی زیباست
+            اَز هَر آنچه اِحساس می‌کنی زیباست.
           </p>
         </div>
         <div class="ProfileModal__row">

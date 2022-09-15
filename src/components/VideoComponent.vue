@@ -1,5 +1,5 @@
 <template>
-  <video class="VideoComponent" controls>
+  <video v-if="url" class="VideoComponent" controls>
     <source :src="url" type="video/mp4" />
     Your browser does not support HTML video.
   </video>
