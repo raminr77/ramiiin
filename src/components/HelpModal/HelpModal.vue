@@ -10,9 +10,10 @@
         <li
           v-for="(command, index) in commands"
           :key="index"
+          :style="!responses[command]?.help && 'display: none'"
           @click="sendCommand({ command, options: responses[command] })"
         >
-          <span>{{ index + 1 }} - </span>
+          <span> - </span>
           <div>{{ responses[command].help }}</div>
         </li>
       </ul>
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import { RESPONSES } from '@/utils/responses';
+import { RESPONSES } from '@/constants/responses';
 import { messageSender } from '@/utils/messageSender';
 
 export default {

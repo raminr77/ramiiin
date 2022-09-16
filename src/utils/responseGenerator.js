@@ -1,4 +1,7 @@
-import { RESPONSES } from '@/utils/responses';
+/* eslint no-console: 0 */
+
+import { isLocal } from '@/utils/isLocal';
+import { RESPONSES } from '@/constants/responses';
 import { transformer } from '@/utils/transformer';
 import { IDK_MESSAGES } from '@/constants/messages';
 import { responseFinder } from '@/utils/responseFinder';
@@ -8,6 +11,13 @@ let IDK_COUNTER = 0;
 export const responseGenerator = (message) => {
   const transformed = transformer(message);
   const customResponse = responseFinder(transformed);
+
+  if (isLocal()) {
+    console.log('-- Command: ', message);
+    console.log('-- Transformed: ', transformed);
+    console.log('-- Custom Response: ', customResponse);
+    console.log('\n');
+  }
 
   if (RESPONSES[transformed]) {
     IDK_COUNTER = 0;
@@ -19,7 +29,7 @@ export const responseGenerator = (message) => {
     return customResponse;
   }
 
-  if (IDK_COUNTER > 6) {
+  if (IDK_COUNTER > 7) {
     IDK_COUNTER = 0;
     return IDK_MESSAGES[0];
   }

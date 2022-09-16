@@ -1,4 +1,4 @@
-import { RESPONSES } from '@/utils/responses';
+import { RESPONSES } from '@/constants/responses';
 
 export const responseFinder = (message = '') => {
   const messageWords = message.split(' ');
