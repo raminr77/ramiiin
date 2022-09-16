@@ -3,6 +3,7 @@
 *::after {
   margin: 0;
   padding: 0;
+  outline: none;
   position: relative;
   font-weight: normal;
   box-sizing: border-box;

@@ -17,5 +17,11 @@ export function arToFaCharacter(value) {
 }
 
 export function faToPiCharacter(value) {
-  return P2F(value);
+  return P2F(value)
+    ?.toString()
+    ?.trim()
+    ?.toUpperCase()
+    ?.replaceAll('AA', 'A')
+    ?.replaceAll('EE', 'I')
+    ?.replaceAll('OOA', 'A');
 }

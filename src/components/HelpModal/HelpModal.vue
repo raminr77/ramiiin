@@ -10,7 +10,7 @@
         <li
           v-for="(command, index) in commands"
           :key="index"
-          @click="sendCommand(command)"
+          @click="sendCommand({ command, options: responses[command] })"
         >
           <span>{{ index + 1 }} - </span>
           <div>{{ responses[command].help }}</div>
@@ -23,6 +23,8 @@
 
 <script>
 import { RESPONSES } from '@/utils/responses';
+import { messageSender } from '@/utils/messageSender';
+
 export default {
   name: 'HelpModal',
   props: {
@@ -37,8 +39,14 @@ export default {
     this.commands = Object.keys(RESPONSES);
   },
   methods: {
-    sendCommand(command) {
-      this.$emit('send-command', command);
+    sendCommand({ command, options }) {
+      messageSender({
+        command,
+        options: {
+          ...options,
+          isDefaultCommand: true
+        }
+      });
       this.$emit('close-modal');
     }
   }

@@ -82,11 +82,12 @@ export default {
   &__header {
     width: 100%;
     display: flex;
-    align-content: center;
+    user-select: none;
+    align-items: center;
     justify-content: space-between;
     h3 {
+      font-size: 16px;
       line-height: 40px;
-      font-weight: bold;
     }
     button {
       width: 40px;
@@ -125,7 +126,7 @@ export default {
       padding: 20px 0;
       text-align: right;
       margin-bottom: 20px;
-      border-bottom: 1px dashed #ddd;
+      border-bottom: 1px solid #1d282d;
     }
   }
   &__imageContainer {

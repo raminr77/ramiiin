@@ -14,7 +14,7 @@
         :videoUrl="videoUrl"
         :audioUrl="audioUrl"
       />
-      <p v-if="text && !audioUrl">{{ text }}</p>
+      <p v-if="text && !audioUrl">{{ isDefaultCommand ? help : text }}</p>
       <MessageItemFooter :time="time" />
     </div>
   </div>
@@ -38,10 +38,12 @@ export default {
   props: {
     id: Number,
     text: String,
+    help: String,
     audioUrl: String,
     imageUrl: String,
     videoUrl: String,
     isSender: Boolean,
+    isDefaultCommand: Boolean,
     delay: {
       type: Number,
       default: 500

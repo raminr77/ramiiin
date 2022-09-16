@@ -33,7 +33,7 @@ export default {
       }
     },
     onSubmit() {
-      messageSender(this.text);
+      messageSender({ command: this.text });
       this.text = '';
     }
   }

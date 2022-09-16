@@ -7,7 +7,7 @@ let IDK_COUNTER = 0;
 
 export const responseGenerator = (message) => {
   const transformed = transformer(message);
-  const customResponse = responseFinder(message);
+  const customResponse = responseFinder(transformed);
 
   if (RESPONSES[transformed]) {
     IDK_COUNTER = 0;
