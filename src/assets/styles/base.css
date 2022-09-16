@@ -47,8 +47,3 @@ body {
   position: absolute;
   background: url('../images/chat-background-pattern.png') center repeat;
 }
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: unset;
-}

@@ -23,13 +23,13 @@
             اَز هَر آنچه اِحساس می‌کنی زیباست.
           </p>
         </div>
-        <div class="ProfileModal__row">
+        <div @click="copyEmail()" class="ProfileModal__row">
           <span>Email: </span>
-          <a href="mailto:info@ramiiin.ir">Info@Ramiiin.ir</a>
+          <a :href="`mailto:${email}`">{{ email }}</a>
         </div>
-        <div class="ProfileModal__row">
+        <div @click="copyPhoneNumber()" class="ProfileModal__row">
           <span>Phone Number:</span>
-          <a href="tel:+989930600012">09930600012</a>
+          <a :href="`tel:${phoneNumber}`">{{ phoneNumber }}</a>
         </div>
       </div>
     </div>
@@ -37,7 +37,9 @@
 </template>
 
 <script>
+import { copy } from '@/utils/copy';
 import ProfileModalSlider from '@/components/ProfileModal/ProfileModalSlider.vue';
+
 export default {
   name: 'ProfileModal',
   props: {
@@ -45,6 +47,20 @@ export default {
   },
   components: {
     ProfileModalSlider
+  },
+  data: () => ({
+    email: 'info@ramiiin.ir',
+    phoneNumber: '09930600012'
+  }),
+  methods: {
+    copyEmail() {
+      const message = 'آدرس ایمیل کپی شد';
+      copy({ text: this.email, message });
+    },
+    copyPhoneNumber() {
+      const message = 'شماره همراه کپی شد';
+      copy({ text: this.phoneNumber, message });
+    }
   }
 };
 </script>
@@ -114,6 +130,7 @@ export default {
     width: 100%;
     display: flex;
     line-height: 30px;
+    user-select: none;
     align-items: center;
     justify-content: flex-start;
     p {

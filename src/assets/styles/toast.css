@@ -1,0 +1,15 @@
+/* Toast */
+.Vue-Toastification__toast {
+    min-height: 40px;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .Vue-Toastification__toast-body {
+    font-size: 14px;
+    user-select: none;
+    font-family: Vazirmatn;
+  }
+  .Vue-Toastification__toast--rtl .Vue-Toastification__icon {
+    margin: auto 0px auto 10px;
+  }
