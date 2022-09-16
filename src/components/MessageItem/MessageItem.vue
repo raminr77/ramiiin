@@ -6,10 +6,13 @@
     <div
       v-else
       class="MessageItem__content"
-      :class="{ ['MessageItem__content--media-size']: audioUrl || videoUrl }"
+      :class="{
+        ['MessageItem__content--media-size']: !isSender && (audioUrl || videoUrl)
+      }"
     >
       <MessageItemMedia
         :text="text"
+        v-if="!isSender"
         :imageUrl="imageUrl"
         :videoUrl="videoUrl"
         :audioUrl="audioUrl"

@@ -15,7 +15,9 @@ export const responseGenerator = (message) => {
   if (isLocal()) {
     console.log('-- Command: ', message);
     console.log('-- Transformed: ', transformed);
-    console.log('-- Custom Response: ', customResponse);
+    if (!RESPONSES[transformed]) {
+      console.log('-- Custom Response: ', customResponse);
+    }
     console.log('\n');
   }
 
