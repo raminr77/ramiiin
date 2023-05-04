@@ -1,4 +1,4 @@
-
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -9,11 +9,22 @@ import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ErrorBoundary from '@/app/components/error-boundary';
+import { BaseContainer } from '@/app/layout/base-container';
+import { SplashScreen } from '@/shared/components/splash-screen';
 import { store } from '@/shared/store';
 import { PersistWrapper } from '@/shared/store/PersistWrapper';
 import '@/styles/globals.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
+  useEffect(() => {
+    let timeRef = setTimeout(() => {
+      setShowSplashScreen(false);
+    }, 2000);
+    return () => clearTimeout(timeRef);
+  });
+
   return (
     <Provider store={store}>
       <PersistWrapper>
@@ -32,22 +43,22 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta http-equiv='X-UA-Compatible' content='IE=edge' />
           <link rel='icon' type='image/png' href='/favicon.png' />
           {/* Personal */}
-          <title>Ramiiin</title>
+          <title>Ramin's Blog</title>
           <meta name='copyright' content='2023' />
           <meta name='theme-color' content='#000' />
           <meta name='application-name' content='Ramin' />
-          <meta name='msapplication-TileColor' content='#000000' />
           <link rel='canonical' href='https://www.ramiiin.ir' />
+          <meta name='msapplication-TileColor' content='#000000' />
+          <meta content='Ramin' name='apple-mobile-web-app-title' />
           <meta name='description' content='Ramin Rezaei Blog Page.' />
           <meta name='msapplication-navbutton-color' content='#000000' />
-          <meta content='Ramin Rezaei' name='apple-mobile-web-app-title' />
           <meta
             name='viewport'
             content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no'
           />
           <meta
             name='keywords'
-            content='Ramin, Rezaei, Ramin Rezaei, fron-end, front-end developer, engineer, developer, React, Next, JavaScript'
+            content='Ramin, Rezaei, Ramin Rezaei, fron-end, front-end developer, engineer, developer, React, Next, JavaScript, Blog'
           />
           {/* Pinned Sites */}
           <meta name='msapplication-starturl' content='/' />
@@ -60,8 +71,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <link sizes='152x152' rel='apple-touch-icon' href='/icons/logo152.png' />
           <link sizes='192x192' rel='apple-touch-icon' href='/icons/logo192.png' />
           {/* Windows */}
-          <meta content='/icons/logo192.png' name='msapplication-TileImage' />
           <meta name='msapplication-config' content='browserconfig.xml' />
+          <meta content='/icons/logo192.png' name='msapplication-TileImage' />
         </Head>
         <NextNprogress
           height={2}
@@ -72,7 +83,13 @@ export default function App({ Component, pageProps }: AppProps) {
           options={{ easing: 'ease', speed: 500, showSpinner: false }}
         />
         <ErrorBoundary>
-          <Component {...pageProps} />
+          {showSplashScreen ? (
+            <SplashScreen />
+          ) : (
+            <BaseContainer>
+              <Component {...pageProps} />
+            </BaseContainer>
+          )}
         </ErrorBoundary>
       </PersistWrapper>
     </Provider>

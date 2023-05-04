@@ -25,35 +25,3 @@ a {
 @tailwind utilities;
 
 @import '../shared/static/animate.min.css';
-
-.font-title {
-  font-weight: 400;
-  font-family: 'Syncopate', sans-serif;
-}
-
-.font-title-bold {
-  font-weight: 700;
-  font-family: 'Syncopate', sans-serif;
-}
-
-// 
-.swal2-popup {
-  color: #fff !important;
-  background-color: #000 !important;
-}
-.swal2-html-container {
-  margin-bottom: 20px !important;
-}
-.swal2-close {
-  border: none !important;
-  outline: none !important;
-}
-// 
-.swiper-button-next, .swiper-button-prev {
-  &::after {
-    color: #fff;
-    padding: 16px 20px;
-    transform: scale(0.5);
-    background-color: rgba(0,0,0,0.3);
-  }
-}
