@@ -1,24 +1,24 @@
 @font-face {
-    font-family: 'Syncopate';
-    src: url('../shared/static/fonts/Syncopate-Bold.eot');
-    src: url('../shared/static/fonts/Syncopate-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../shared/static/fonts/Syncopate-Bold.woff2') format('woff2'),
-        url('../shared/static/fonts/Syncopate-Bold.woff') format('woff'),
-        url('../shared/static/fonts/Syncopate-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: yekan;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../shared/static/fonts/Yekan/iranyekanwebregularfanum.eot');
+  src: url('../shared/static/fonts/Yekan/iranyekanwebregularfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('../shared/static/fonts/Yekan/iranyekanwebregularfanum.woff') format('woff'),
+    url('../shared/static/fonts/Yekan/iranyekanwebregularfanum.ttf') format('truetype');
 }
-
 @font-face {
-    font-family: 'Syncopate';
-    src: url('../shared/static/fonts/Syncopate-Regular.eot');
-    src: url('../shared/static/fonts/Syncopate-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../shared/static/fonts/Syncopate-Regular.woff2') format('woff2'),
-        url('../shared/static/fonts/Syncopate-Regular.woff') format('woff'),
-        url('../shared/static/fonts/Syncopate-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: yekanB;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../shared/static/fonts/Yekan/iranyekanwebextraboldfanum.eot');
+  src: url('../shared/static/fonts/Yekan/iranyekanwebextraboldfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('../shared/static/fonts/Yekan/iranyekanwebextraboldfanum.woff') format('woff'),
+    url('../shared/static/fonts/Yekan/iranyekanwebextraboldfanum.ttf') format('truetype');
 }
 
+.yekan-bold {
+  font-family: yekan;
+}

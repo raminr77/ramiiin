@@ -1,7 +1,3 @@
 export function IndexPage() {
-  return (
-    <main>
-      Index
-    </main>
-  );
+  return <main>Index</main>;
 }

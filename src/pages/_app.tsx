@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
@@ -13,6 +14,7 @@ import { BaseContainer } from '@/app/layout/base-container';
 import { SplashScreen } from '@/shared/components/splash-screen';
 import { store } from '@/shared/store';
 import { PersistWrapper } from '@/shared/store/PersistWrapper';
+import { animator } from '@/shared/utils/animator';
 import '@/styles/globals.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -23,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       setShowSplashScreen(false);
     }, 2000);
     return () => clearTimeout(timeRef);
-  });
+  }, []);
 
   return (
     <Provider store={store}>
@@ -83,13 +85,15 @@ export default function App({ Component, pageProps }: AppProps) {
           options={{ easing: 'ease', speed: 500, showSpinner: false }}
         />
         <ErrorBoundary>
-          {showSplashScreen ? (
-            <SplashScreen />
-          ) : (
-            <BaseContainer>
-              <Component {...pageProps} />
-            </BaseContainer>
-          )}
+          <ThemeProvider attribute='class'>
+            {showSplashScreen ? (
+              <SplashScreen />
+            ) : (
+              <BaseContainer className={animator({ name: 'fadeIn' })}>
+                <Component {...pageProps} />
+              </BaseContainer>
+            )}
+          </ThemeProvider>
         </ErrorBoundary>
       </PersistWrapper>
     </Provider>
