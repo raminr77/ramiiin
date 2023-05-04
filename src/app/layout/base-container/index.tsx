@@ -4,5 +4,7 @@ export function BaseContainer({
   children,
   className
 }: GCommonCompnentPropertiesWithChildren) {
-  return <div className={classNames('min-h-screen', className)}>{children}</div>;
+  return (
+    <div className={classNames('min-h-screen select-none', className)}>{children}</div>
+  );
 }
