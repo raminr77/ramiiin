@@ -1,6 +1,0 @@
-*.svg
-*.png
-/src/**/*.webmanifest
-/src/**/*.html
-/src/**/assets/imgs/**/*
-/src/**/assets/fonts/**/*
