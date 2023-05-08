@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -11,22 +10,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ErrorBoundary from '@/app/components/error-boundary';
 import { BaseContainer } from '@/app/layout/base-container';
-import { SplashScreen } from '@/shared/components/splash-screen';
 import { store } from '@/shared/store';
 import { PersistWrapper } from '@/shared/store/PersistWrapper';
-import { animator } from '@/shared/utils/animator';
 import '@/styles/globals.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [showSplashScreen, setShowSplashScreen] = useState(true);
-
-  useEffect(() => {
-    let timeRef = setTimeout(() => {
-      setShowSplashScreen(false);
-    }, 2000);
-    return () => clearTimeout(timeRef);
-  }, []);
-
   return (
     <Provider store={store}>
       <PersistWrapper>
@@ -86,13 +74,9 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <ErrorBoundary>
           <ThemeProvider attribute='class'>
-            {showSplashScreen ? (
-              <SplashScreen />
-            ) : (
-              <BaseContainer className={animator({ name: 'fadeIn' })}>
-                <Component {...pageProps} />
-              </BaseContainer>
-            )}
+            <BaseContainer>
+              <Component {...pageProps} />
+            </BaseContainer>
           </ThemeProvider>
         </ErrorBoundary>
       </PersistWrapper>
