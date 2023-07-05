@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNprogress from 'nextjs-progressbar';
-import 'sweetalert2/src/sweetalert2.scss';
 import 'swiper/css';
 import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
