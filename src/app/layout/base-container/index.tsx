@@ -10,12 +10,12 @@ export function BaseContainer({ children, className, containerClassName }: Props
   return (
     <div
       className={classNames(
-        'min-h-screen overflow-x-hidden select-none relative',
+        'min-h-screen overflow-x-hidden select-none relative flex flex-col items-center',
         className
       )}
     >
       <Header />
-      <div className={classNames('w-full max-w-screen-xl', containerClassName)}>
+      <div className={classNames('w-full max-w-screen-xl mt-20', containerClassName)}>
         {children}
       </div>
       <Footer />
