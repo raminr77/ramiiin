@@ -2,15 +2,18 @@ import { useCallback, useRef } from 'react';
 import classNames from 'classnames';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useWindowWidth } from '@/shared/hooks/use-window-width';
 import { Image } from '../Image';
 import { CarouselItem } from './carousel-item';
 
 interface Props extends GCommonCompnentProperties {
+  items: [];
   title?: string;
   description?: string;
 }
-export function Carousel({ title, description, className }: Props) {
+export function Carousel({ title, description, className, items = [] }: Props) {
   const sliderRef = useRef<any>(null);
+  const { isDesktop } = useWindowWidth();
 
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
@@ -31,10 +34,10 @@ export function Carousel({ title, description, className }: Props) {
         <Swiper
           ref={sliderRef}
           spaceBetween={10}
-          slidesPerView={4}
           modules={[Navigation]}
+          slidesPerView={isDesktop ? 4 : 2}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => (
+          {items?.map((item) => (
             <SwiperSlide key={item}>
               <CarouselItem />
             </SwiperSlide>
