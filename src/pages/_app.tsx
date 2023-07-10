@@ -8,11 +8,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ErrorBoundary from '@/app/components/error-boundary';
 import { BaseContainer } from '@/app/layout/base-container';
+import { usePageName } from '@/shared/hooks/use-page-name';
 import { store } from '@/shared/store';
 import { PersistWrapper } from '@/shared/store/PersistWrapper';
 import '@/styles/globals.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { title } = usePageName();
   return (
     <Provider store={store}>
       <PersistWrapper>
@@ -31,9 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta http-equiv='X-UA-Compatible' content='IE=edge' />
           <link rel='icon' type='image/png' href='/favicon.png' />
           {/* Personal */}
-          <title>Ramin's Blog</title>
           <meta name='copyright' content='2023' />
           <meta name='theme-color' content='#000' />
+          <title>{`دستـ خطـ رامـینـــ | ${title}`}</title>
           <meta name='application-name' content='Ramin' />
           <link rel='canonical' href='https://www.ramiiin.ir' />
           <meta name='msapplication-TileColor' content='#000000' />

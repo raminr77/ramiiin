@@ -10,10 +10,7 @@ export const ToggleThemeBtn = () => {
   };
 
   return (
-    <button
-      onClick={toggle}
-      className='p-2 rounded-full bg-slate-100 dark:bg-slate-600 outline-none'
-    >
+    <button onClick={toggle} className='p-2 rounded-full backdrop-blur-sm outline-none'>
       <Image
         width={16}
         height={16}

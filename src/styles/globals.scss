@@ -26,4 +26,8 @@ a {
 @tailwind components;
 @tailwind utilities;
 
+.min-h-with-menu {
+  min-height: calc(100vh - 150px);
+}
+
 @import '../shared/static/animate.min.css';
